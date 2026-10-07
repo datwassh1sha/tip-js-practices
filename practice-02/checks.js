@@ -347,13 +347,66 @@ check("35. Работа с другим набором, без зависимо�
   assert.deepEqual(tasks, before);
 });
 
-// Три собственных проверки можно добавить здесь, до итогового вывода,
-// либо выполнить отдельно и описать в отчёте. Общие проверки удалять не нужно.
-// Пример формы записи (не готовая проверка задания):
-// check("Собственный случай: ...", () => {
-//   const result = ...;
-//   assert.deepEqual(result, ...);
-// });
+check("36. Собственная проверка: добавление задачи с пробелами", () => {
+  const tasks = [];
+
+  const result = addTask(tasks, 50, "  Подготовить релиз  ", "high");
+
+  const next = expectTasks(result);
+
+  assert.deepEqual(next, [
+    {
+      id: 50,
+      title: "Подготовить релиз",
+      completed: false,
+      priority: "high",
+    },
+  ]);
+
+  assert.deepEqual(tasks, []);
+});
+
+check("37. Собственная проверка: изменение статуса уже выполненной задачи", () => {
+  const tasks = [
+    { id: 11, title: "Сформировать релиз", completed: true, priority: "high" },
+  ];
+
+  const result = setTaskCompleted(tasks, 11, true);
+  const next = expectTasks(result);
+
+  assert.deepEqual(next, [
+    {
+      id: 11,
+      title: "Сформировать релиз",
+      completed: true,
+      priority: "high",
+    },
+  ]);
+
+  assert.notEqual(next, tasks);
+  assert.notEqual(next[0], tasks[0]);
+  assert.deepEqual(tasks, [
+    {
+      id: 11,
+      title: "Сформировать релиз",
+      completed: true,
+      priority: "high",
+    },
+  ]);
+});
+
+check("38. Собственная проверка: повторное добавление id", () => {
+  const tasks = [
+    { id: 80, title: "Подготовить материалы", completed: false, priority: "high" },
+  ];
+
+  const before = copyTasks(tasks);
+
+  const result = addTask(tasks, 80, "Другая задача", "low");
+
+  expectFailure(result);
+  assert.deepEqual(tasks, before);
+});
 
 console.log(`\nПроверок пройдено: ${passed}; не пройдено: ${failed}.`);
 if (failed > 0) {
