@@ -1,0 +1,11 @@
+node_modules/
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+*.log
+
+# Служебные файлы локальных сценариев проверки (не являются частью решения)
+tools/.*
+.scratch/
