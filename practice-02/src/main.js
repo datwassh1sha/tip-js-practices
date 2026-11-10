@@ -1,4 +1,4 @@
-import { demoTasks, variantNumber, variantTasks } from "./data.js";
+import { demoTasks, variantNumber } from "./data.js";
 
 import {
     createTask,
@@ -57,9 +57,9 @@ if (result.ok) {
     console.error(`Ошибка: ${result.error}`);
 }
 
-console.log("\n2. Выполнение задачи id = 4");
+console.log("\n2. Выполнение задачи id = 7");
 
-result = setTaskCompleted(currentTasks, 4, true);
+result = setTaskCompleted(currentTasks, 7, true);
 
 if (result.ok) {
     currentTasks = result.tasks;
@@ -125,4 +125,4 @@ console.log("\nИтоговые идентификаторы:");
 console.log(currentTasks.map(task => task.id));
 
 console.log("\nВариант:", variantNumber);
-console.log("Количество задач варианта:", variantTasks.length);
+console.log("Количество задач варианта:", demoTasks.length);

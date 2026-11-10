@@ -1,7 +1,7 @@
 "use strict";
 
-const totalTasks = 10;
-const completedTasks = 7;
+const totalTasks = 5;
+const completedTasks = 6;
 
 // Проверка типов и числовых значений
 if (
